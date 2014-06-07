@@ -16,7 +16,6 @@ Pyramid::Pyramid(sf::Window& w) {
 	vao.Bind();
 	vbo.Bind(Buffer::Target::Array);
 	Buffer::Data(Buffer::Target::Array, sizeof(positions), positions, BufferUsage::StaticDraw);
-	position.Bind("position");
 	position.Setup<Vec3f>().Enable();
 
 	Model 		= Uniform<Mat4f>{ program, "Model"};
@@ -39,7 +38,7 @@ void Pyramid::draw(Context gl){
 
 void Pyramid::update() {
 	vao.Bind();
-	View.SetValue(Camera::camera.getWorldToViewMatrix());
+	View.SetValue(camera.getWorldToViewMatrix());
 	color.SetValue(Vec3f{(float)sin(clock()), 0.0f, 0.0f});
 }
 

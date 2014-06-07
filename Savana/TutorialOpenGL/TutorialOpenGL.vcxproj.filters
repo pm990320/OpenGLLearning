@@ -19,18 +19,9 @@
     <Filter Include="Resource Files\Shaders">
       <UniqueIdentifier>{c565513f-efc9-4bfa-9c3c-8501617f3ab8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files\Textures">
-      <UniqueIdentifier>{d841a041-d187-46ae-9077-dbf939cdb0b5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\Old Classes">
-      <UniqueIdentifier>{5f6240da-14ba-4c8f-855c-81c2cf8c38a6}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Utils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="main_caller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="oglplus.cpp">
@@ -91,10 +82,5 @@
     <None Include="..\Debug\shaders\trans_vs.vertexshader">
       <Filter>Resource Files\Shaders</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\Debug\textures\hyena.png">
-      <Filter>Resource Files\Textures</Filter>
-    </Image>
   </ItemGroup>
 </Project>

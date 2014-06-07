@@ -8,10 +8,8 @@
 #pragma once
 
 #include "Camera.h"
-#include <oglplus/gl.hpp>
+#include <oglplus/site_config.hpp>
 #include <oglplus/all.hpp>
-#include <oglplus/shader.hpp>
-#include <oglplus/vertex_attrib.hpp>
 #include <SFML/Window.hpp>
 #include <ctime>
 #include <cmath>
@@ -25,12 +23,14 @@ class Pyramid {
 	Buffer vbo;
 	Buffer ebo;
 
-	float positions[6] = {  // TODO finish vertices
+	const int nVertices = 3;
+	float positions[9] = {  // TODO finish vertices
 		//	X		Y		Z
 			0,		0.5,	0,
-			-0.25,	0,		
+			-0.25,	0,		-0.25,
+			0.25,	0,		-0.25,	
 	};
-	VertexArrayAttrib position{ program, "position" };
+	VertexArrayAttrib position{ program, VertexAttribSlot{0} };
 	Uniform<Mat4f> Model;
 	Uniform<Mat4f> View;
 	Uniform<Mat4f> Projection;

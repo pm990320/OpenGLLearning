@@ -72,7 +72,6 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\..\..\GL\oglplus\example\oglplus\001_triangle.cpp" />
     <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="main_caller.cpp" />
     <ClCompile Include="oglplus.cpp" />
     <ClCompile Include="TrySprite.cpp" />
     <ClCompile Include="Utils.cpp" />
@@ -94,9 +93,6 @@
     <None Include="..\Debug\shaders\texture.vertexshader" />
     <None Include="..\Debug\shaders\trans_fs.fragmentshader" />
     <None Include="..\Debug\shaders\trans_vs.vertexshader" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\Debug\textures\hyena.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
