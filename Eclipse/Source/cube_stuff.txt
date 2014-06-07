@@ -1,0 +1,88 @@
+
+	VertexShader vs{ GLSLSource::FromFile("C:/Users/Patrick/Documents/PROGRAMMING/OPENGL/Eclipse/Source/try_vs.glsl") };
+	vs.Compile();
+	FragmentShader fs{ GLSLSource::FromFile("C:/Users/Patrick/Documents/PROGRAMMING/OPENGL/Eclipse/Source/try_fs.glsl") };
+	fs.Compile();
+	Program prog;
+	prog.AttachShader(vs);
+	prog.AttachShader(fs);
+	prog.Link();
+	prog.Use();
+
+	VertexArray vao;
+	vao.Bind();
+
+	Buffer pos_buf;
+	pos_buf.Bind(Buffer::Target::Array);
+	const GLfloat c[8][3] = {
+				{-0.5f, -0.5f, +0.5f},
+				{-0.5f, -0.5f, -0.5f},
+				{-0.5f, +0.5f, -0.5f},
+				{-0.5f, +0.5f, +0.5f},
+				{+0.5f, -0.5f, +0.5f},
+				{+0.5f, -0.5f, -0.5f},
+				{+0.5f, +0.5f, -0.5f},
+				{+0.5f, +0.5f, +0.5f}
+			};
+	const GLuint vertex_count = 6 * 2 * 3;
+	const GLfloat cube_vertices[vertex_count * 3] = {
+				c[0][0], c[0][1], c[0][2],
+				c[2][0], c[2][1], c[2][2],
+				c[1][0], c[1][1], c[1][2],
+				c[0][0], c[0][1], c[0][2],
+				c[3][0], c[3][1], c[3][2],
+				c[2][0], c[2][1], c[2][2],
+
+				c[0][0], c[0][1], c[0][2],
+				c[1][0], c[1][1], c[1][2],
+				c[4][0], c[4][1], c[4][2],
+				c[1][0], c[1][1], c[1][2],
+				c[5][0], c[5][1], c[5][2],
+				c[4][0], c[4][1], c[4][2],
+
+				c[1][0], c[1][1], c[1][2],
+				c[2][0], c[2][1], c[2][2],
+				c[5][0], c[5][1], c[5][2],
+				c[2][0], c[2][1], c[2][2],
+				c[6][0], c[6][1], c[6][2],
+				c[5][0], c[5][1], c[5][2],
+
+				c[4][0], c[4][1], c[4][2],
+				c[5][0], c[5][1], c[5][2],
+				c[6][0], c[6][1], c[6][2],
+				c[4][0], c[4][1], c[4][2],
+				c[6][0], c[6][1], c[6][2],
+				c[7][0], c[7][1], c[7][2],
+
+				c[2][0], c[2][1], c[2][2],
+				c[3][0], c[3][1], c[3][2],
+				c[7][0], c[7][1], c[7][2],
+				c[2][0], c[2][1], c[2][2],
+				c[7][0], c[7][1], c[7][2],
+				c[6][0], c[6][1], c[6][2],
+
+				c[0][0], c[0][1], c[0][2],
+				c[4][0], c[4][1], c[4][2],
+				c[3][0], c[3][1], c[3][2],
+				c[3][0], c[3][1], c[3][2],
+				c[4][0], c[4][1], c[4][2],
+				c[7][0], c[7][1], c[7][2]
+			};
+	Buffer::Data(Buffer::Target::Array, vertex_count * 3, cube_vertices);
+	VertexArrayAttrib position{ prog, "position" };
+	position.Setup<Vec3f>().Enable();
+
+	Uniform<Vec3f> color{ prog, "color" };
+
+	Camera camera;
+
+	Uniform<Mat4f> Projection{ prog, "Projection" };
+	Mat4f projMat = CamMatrixf::PerspectiveY(Degrees(60.0f), w.getSize().x/w.getSize().y, 0.2f, 100.0f);
+	Projection.Set( projMat );
+
+	Uniform<Mat4f> View{ prog, "View" };
+	View.SetValue(camera.getWorldToViewMatrix());
+
+	Uniform<Mat4f> Model{ prog, "Model" };
+	Mat4f modelMat = ModelMatrixf::Translation(0, 0, 0.0f);
+	Model.SetValue(modelMat);
