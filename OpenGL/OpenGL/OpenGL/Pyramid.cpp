@@ -7,7 +7,10 @@
 
 #include "Pyramid.h"
 
-Pyramid::Pyramid(sf::Window& w, Cam::Camera& c) : camera{ c } {
+Pyramid::Pyramid(Window& w, Cam::Camera& c) : window{ w }, camera{ c } {
+	nVertices = 5;
+	nIndices = 18;
+
 	vs.Source(GLSLSource::FromFile("shaders/pyramid_vs.glsl"));
 	vs.Compile();
 	program.AttachShader(vs);
@@ -55,18 +58,18 @@ Pyramid::Pyramid(sf::Window& w, Cam::Camera& c) : camera{ c } {
 
 }
 
-void Pyramid::draw(){
+void Pyramid::draw() const {
 	vao.Bind();
 	vbo.Bind(Buffer::Target::Array);
 	ebo.Bind(Buffer::Target::ElementArray);
 
-	gl.DrawElements(PrimitiveType::Triangles, nIndices, DataType::UnsignedShort);
+	window.gl.DrawElements(PrimitiveType::Triangles, nIndices, DataType::UnsignedShort);
 }
 
 void Pyramid::update() {
 	vao.Bind();
 	View.SetValue(camera.getWorldToViewMatrix());
-	color.SetValue(Vec3f{1.0f, 0.0f, 0.0f});
+	color.SetValue(Vec3f{0.0f, 1.0f, 0.0f});
 }
 
 Pyramid::~Pyramid() {

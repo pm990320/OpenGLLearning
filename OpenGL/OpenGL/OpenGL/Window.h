@@ -1,5 +1,25 @@
-#include <SFML/Window.hpp>
+#pragma once
 
-namespace Window {
-	extern sf::Window& window;
-}
+#include <GL/glew.h>
+#include <SFML/Window.hpp>
+#include <oglplus/all.hpp>
+#include <oglplus/gl.hpp>
+#include <oglplus/capability.hpp>
+
+class Window {
+	/* 
+	 *	
+	 */
+	sf::ContextSettings set;
+public:
+	sf::Window window{ sf::VideoMode(640, 480), "OpenGL", sf::Style::Default, set };
+	oglplus::Context gl;
+
+	Window();
+	inline unsigned short Width() {
+		return window.getSize().x;
+	}
+	inline unsigned short Height() {
+		return window.getSize().y;
+	}
+};

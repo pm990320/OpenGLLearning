@@ -9,21 +9,18 @@
 using namespace oglplus;
 
 int main() {
-	// initialise context
-	sf::ContextSettings set;
-	sf::Window window{ sf::VideoMode(640, 480), "OpenGL", sf::Style::Default, set};
-	glewExperimental = true;
-	glewInit();
-
+	Window window;
 	//setup
-	Cam::Camera camera{ window };
-	Pyramid pyramid { window, camera };
+	Cam::Camera camera{ window.window };
+	Pyramid pyramid{ window, camera };
+	ShapeContainer shapes;
+	shapes.addShape(pyramid);
 
 	// main loop
 	bool running = true;
 	while (running) {
 		sf::Event e;
-		while (window.pollEvent(e)) {
+		while (window.window.pollEvent(e)) {
 			switch (e.type) {
 			case sf::Event::Closed:
 				running = false;
@@ -49,19 +46,17 @@ int main() {
 			}
 		}
 
-		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
-		glClear(GL_DEPTH_BUFFER_BIT);
+		window.gl.Clear().ColorBuffer().DepthBuffer();
 
 		//update
 		camera.move_with_mouse();
-		pyramid.update();
+		shapes.updateShapes();
 
 		//draw
-		pyramid.draw();
-		window.display();
+		shapes.drawShapes();
+		window.window.display();
 
-		sf::Mouse::setPosition(sf::Vector2i( window.getSize().x / 2, window.getSize().y / 2), window);
+		sf::Mouse::setPosition(sf::Vector2i(window.window.getSize().x / 2, window.window.getSize().y / 2), window.window);
 	}
 
 	return 0;

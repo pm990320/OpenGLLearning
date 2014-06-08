@@ -76,10 +76,13 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Pyramid.cpp" />
+    <ClCompile Include="Shape.cpp" />
+    <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Pyramid.h" />
+    <ClInclude Include="Shape.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
