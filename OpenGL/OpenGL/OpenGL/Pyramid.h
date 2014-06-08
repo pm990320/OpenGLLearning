@@ -16,29 +16,26 @@
 using namespace oglplus;
 
 class Pyramid {
-	VertexShader vs { GLSLSource::FromFile("C:/Users/Patrick/Documents/PROGRAMMING/OPENGL/Eclipse/Source/pyramid_vs.glsl") };
-	FragmentShader fs { GLSLSource::FromFile("C:/Users/Patrick/Documents/PROGRAMMING/OPENGL/Eclipse/Source/pyramid_fs.glsl") };
+	Context gl;
+	VertexShader vs;
+	FragmentShader fs;
 	Program program;
 	VertexArray vao;
 	Buffer vbo;
 	Buffer ebo;
 
-	const int nVertices = 3;
-	float positions[9] = {  // TODO finish vertices
-		//	X		Y		Z
-			0,		0.5,	0,
-			-0.25,	0,		-0.25,
-			0.25,	0,		-0.25,	
-	};
-	VertexArrayAttrib position{ program, VertexAttribSlot{0} };
+	const int nVertices = 5;
+	const int nIndices = 18;
+	
 	Uniform<Mat4f> Model;
 	Uniform<Mat4f> View;
 	Uniform<Mat4f> Projection;
 	Uniform<Vec3f> color;
+	Cam::Camera& camera;
 public:
-	Pyramid(sf::Window& w);
+	Pyramid(sf::Window& w, Cam::Camera& c);
 
-	void draw(Context gl);
+	void draw();
 	void update();
 
 	virtual ~Pyramid();

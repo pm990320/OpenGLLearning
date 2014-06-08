@@ -35,12 +35,15 @@
     <ClInclude Include="Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="pyramid_vs.glsl">
+    <None Include="shaders\pyramid_fs.glsl">
       <Filter>Resource Files\Shaders</Filter>
     </None>
-    <None Include="pyramid_fs.glsl">
+    <None Include="shaders\pyramid_vs.glsl">
       <Filter>Resource Files\Shaders</Filter>
     </None>
   </ItemGroup>

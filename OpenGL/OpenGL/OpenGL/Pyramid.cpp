@@ -7,41 +7,68 @@
 
 #include "Pyramid.h"
 
-Pyramid::Pyramid(sf::Window& w) {
+Pyramid::Pyramid(sf::Window& w, Cam::Camera& c) : camera{ c } {
+	vs.Source(GLSLSource::FromFile("shaders/pyramid_vs.glsl"));
 	vs.Compile();
-	fs.Compile();
 	program.AttachShader(vs);
+
+	fs.Source(GLSLSource::FromFile("shaders/pyramid_fs.glsl"));
+	fs.Compile();
 	program.AttachShader(fs);
+	program.Link();
+	program.Use();
 
 	vao.Bind();
 	vbo.Bind(Buffer::Target::Array);
+	float positions[] = {  // TODO finish vertices
+		//	X		Y		Z
+			0,		0.5,	0,			// 0
+			-0.25,	0,		-0.25,		// 1
+			0.25,	0,		-0.25,		// 2
+			-0.25,	0,		0.25,		// 3
+			0.25,	0,		0.25		// 4
+	};
 	Buffer::Data(Buffer::Target::Array, sizeof(positions), positions, BufferUsage::StaticDraw);
-	position.Setup<Vec3f>().Enable();
+	VertexArrayAttrib position{ program, "position" };
+	position.Setup<Vec3f>();
+	position.Enable();
+
+	ebo.Bind(Buffer::Target::ElementArray);
+	unsigned short indices[] = {
+		0, 1, 2,
+		0, 1, 3,
+		0, 3, 4,
+		0, 2, 4,
+		1, 2, 3,
+		2, 3, 4
+	};
+	Buffer::Data(Buffer::Target::ElementArray, sizeof(indices), indices, BufferUsage::StaticDraw);
 
 	Model 		= Uniform<Mat4f>{ program, "Model"};
 	View 		= Uniform<Mat4f>{ program, "View" };
 	Projection 	= Uniform<Mat4f>{ program, "Projection" };
 
-	Model.SetValue(ModelMatrixf::TranslationZ(3.0f));
-	Projection.SetValue(CamMatrixf::PerspectiveY(Degrees(60), (float)w.getSize().x/w.getSize().y, 0.3f, 100.0f));
+	Model.SetValue(ModelMatrixf::TranslationZ(-2.0f));
+	Projection.SetValue(camera.getProjectionMatrix());
 
 	color = Uniform<Vec3f>{program, "color"};
 
 }
 
-void Pyramid::draw(Context gl){
+void Pyramid::draw(){
 	vao.Bind();
 	vbo.Bind(Buffer::Target::Array);
+	ebo.Bind(Buffer::Target::ElementArray);
 
-	gl.DrawArrays(PrimitiveType::Triangles, 0, 2);
+	gl.DrawElements(PrimitiveType::Triangles, nIndices, DataType::UnsignedShort);
 }
 
 void Pyramid::update() {
 	vao.Bind();
 	View.SetValue(camera.getWorldToViewMatrix());
-	color.SetValue(Vec3f{(float)sin(clock()), 0.0f, 0.0f});
+	color.SetValue(Vec3f{1.0f, 0.0f, 0.0f});
 }
 
 Pyramid::~Pyramid() {
-
+	
 }

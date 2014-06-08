@@ -1,6 +1,6 @@
 /**
- *  @file oglplus/images/voronoi.hpp
- *  @brief Voronoi diagram image generators
+ *  @file oglplus/images/worley.hpp
+ *  @brief Worley cells image generators
  *
  *  @author Matus Chochlik
  *
@@ -10,19 +10,19 @@
  */
 
 #pragma once
-#ifndef OGLPLUS_IMAGES_VORONOI_1107121519_HPP
-#define OGLPLUS_IMAGES_VORONOI_1107121519_HPP
+#ifndef OGLPLUS_IMAGES_WORLEY_1107121519_HPP
+#define OGLPLUS_IMAGES_WORLEY_1107121519_HPP
 
 #include <oglplus/images/image.hpp>
 
 namespace oglplus {
 namespace images {
 
-class VoronoiDiagram
+class WorleyCells
  : public Image
 {
 public:
-	VoronoiDiagram(
+	WorleyCells(
 		GLsizei cell_w,
 		GLsizei cell_h,
 		GLsizei cell_d,
@@ -34,7 +34,7 @@ public:
 } // oglplus
 
 #if !OGLPLUS_LINK_LIBRARY || defined(OGLPLUS_IMPLEMENTING_LIBRARY)
-#include <oglplus/images/voronoi.ipp>
+#include <oglplus/images/worley.ipp>
 #endif
 
 #endif // include guard

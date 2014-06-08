@@ -6,17 +6,25 @@
  */
 
 #include "Camera.h"
+using namespace oglplus;
+using namespace Cam;
 
-Camera::Camera() : position{Vec3f(0, 0, 2)}, viewDirection{ Vec3f(0, 0, 0) },
-	oldMousePosition{ Vec2f(700.0/2, 700.0/2) }
-{}
+Camera::Camera(sf::Window& w) : window{ w }, position{ 0, 0, 2 }, viewDirection{ 0, 0, 0 }, oldMousePosition{ w.getSize().x / 2 , w.getSize().y /2 }
+{ 
+
+}
 
 Mat4f Camera::getWorldToViewMatrix() {
 	return CamMatrixf::LookingAt(position, viewDirection, Vec3f(0, 1, 0));
 }
 
-void Camera::move_with_mouse(sf::Window& w){
-	Vec2f newPos{ sf::Mouse::getPosition(w).x, -sf::Mouse::getPosition(w).y };
+Mat4f Camera::getProjectionMatrix() {
+	sf::Vector2u size = window.getSize();
+	return CamMatrixf::PerspectiveY(Degrees(60), size.x / size.y, 0.2f, 100.0f);
+}
+
+void Camera::move_with_mouse(){
+	Vec2f newPos{ (float)sf::Mouse::getPosition(window).x, -(float)sf::Mouse::getPosition(window).y };
 	Vec2f dPos = oldMousePosition - newPos;
 
 	viewDirection = Rotate(
@@ -49,5 +57,4 @@ void Camera::right(){
 	viewDirection += Vec3f(0.25, 0.0, 0.0);
 }
 
-Camera camera;
 
