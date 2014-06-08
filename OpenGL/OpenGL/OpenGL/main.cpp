@@ -53,7 +53,6 @@ int main() {
 		glClear(GL_COLOR_BUFFER_BIT);
 		glClear(GL_DEPTH_BUFFER_BIT);
 
-
 		//update
 		camera.move_with_mouse();
 		pyramid.update();
@@ -61,6 +60,8 @@ int main() {
 		//draw
 		pyramid.draw();
 		window.display();
+
+		sf::Mouse::setPosition(sf::Vector2i( window.getSize().x / 2, window.getSize().y / 2), window);
 	}
 
 	return 0;

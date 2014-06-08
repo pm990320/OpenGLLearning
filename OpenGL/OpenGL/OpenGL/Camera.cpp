@@ -11,7 +11,7 @@ using namespace Cam;
 
 Camera::Camera(sf::Window& w) : window{ w }, position{ 0, 0, 2 }, viewDirection{ 0, 0, 0 }, oldMousePosition{ w.getSize().x / 2 , w.getSize().y /2 }
 { 
-
+	//viewDirection = Rotate(Quatf{ Vec3f(1, 0, 0), Degrees(30) }, viewDirection);
 }
 
 Mat4f Camera::getWorldToViewMatrix() {
