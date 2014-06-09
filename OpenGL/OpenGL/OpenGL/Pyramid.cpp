@@ -23,7 +23,7 @@ Pyramid::Pyramid(Window& w, Cam::Camera& c) : window{ w }, camera{ c } {
 
 	vao.Bind();
 	vbo.Bind(Buffer::Target::Array);
-	float positions[] = {  // TODO finish vertices
+	float positions[] = { 
 		//	X		Y		Z
 			0,		0.5,	0,			// 0
 			-0.25,	0,		-0.25,		// 1

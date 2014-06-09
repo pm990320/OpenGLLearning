@@ -19,9 +19,9 @@ class Camera {
 	Vec3f position;
 	Vec3f viewDirection;
 	Vec2f oldMousePosition;
-	sf::Window& window;
+	Window& window;
 public:
-	Camera(sf::Window& w);
+	Camera(Window& w);
 	Mat4f getWorldToViewMatrix();
 	Mat4f getProjectionMatrix();
 	void move_with_mouse();

@@ -16,10 +16,10 @@ public:
 	oglplus::Context gl;
 
 	Window();
-	inline unsigned short Width() {
+	inline float Width() {
 		return window.getSize().x;
 	}
-	inline unsigned short Height() {
+	inline float Height() {
 		return window.getSize().y;
 	}
 };

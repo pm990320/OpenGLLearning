@@ -9,9 +9,9 @@
 using namespace oglplus;
 using namespace Cam;
 
-Camera::Camera(sf::Window& w) : window{ w }, position{ 0, 0, 2 }, viewDirection{ 0, 0, 0 }, oldMousePosition{ w.getSize().x / 2, w.getSize().y / 2 }
+Camera::Camera(Window& w) : window{ w }, position{ 0, 0, 2 }, viewDirection{ 0, 0, 0 }, oldMousePosition{ (float)w.Width() / 2, (float)w.Height() / 2 }
 { 
-	//viewDirection = Rotate(Quatf{ Vec3f(1, 0, 0), Degrees(30) }, viewDirection);
+
 }
 
 Mat4f Camera::getWorldToViewMatrix() {
@@ -19,12 +19,11 @@ Mat4f Camera::getWorldToViewMatrix() {
 }
 
 Mat4f Camera::getProjectionMatrix() {
-	sf::Vector2u size = window.getSize();
-	return CamMatrixf::PerspectiveY(Degrees(60), size.x / size.y, 0.2f, 100.0f);
+	return CamMatrixf::PerspectiveY(Degrees(60), (float)window.Width() / window.Height(), 0.2f, 100.0f);
 }
 
 void Camera::move_with_mouse(){
-	Vec2f newPos{ (float)sf::Mouse::getPosition(window).x, -(float)sf::Mouse::getPosition(window).y };
+	Vec2f newPos{ (float)sf::Mouse::getPosition(window.window).x, -(float)sf::Mouse::getPosition(window.window).y };
 	Vec2f dPos = oldMousePosition - newPos;
 
 	viewDirection = Rotate(

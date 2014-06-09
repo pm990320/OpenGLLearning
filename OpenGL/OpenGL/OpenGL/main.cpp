@@ -11,7 +11,7 @@ using namespace oglplus;
 int main() {
 	Window window;
 	//setup
-	Cam::Camera camera{ window.window };
+	Cam::Camera camera{ window };
 	Pyramid pyramid{ window, camera };
 	ShapeContainer shapes;
 	shapes.addShape(pyramid);
