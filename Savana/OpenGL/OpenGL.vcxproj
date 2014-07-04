@@ -11,10 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Misc.cpp" />
-    <ClCompile Include="Sprites.cpp" />
+    <None Include="player_f.fragmentshader" />
+    <None Include="player_v.vertexshader" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -22,8 +20,10 @@
     <ClInclude Include="Sprites.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="player_f.fragmentshader" />
-    <None Include="player_v.vertexshader" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Misc.cpp" />
+    <ClCompile Include="Sprites.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{12A8E542-B188-4F90-9990-03FF49E0FD48}</ProjectGuid>
@@ -59,13 +59,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>E:\FILES\PROGRAMMING\Savana_Game\Savana\OpenGL\GLEW\include;E:\FILES\PROGRAMMING\Savana_Game\Savana\OpenGL\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\GL\GLEW\include;C:\GL\SFML-VS2013\include;C:\Users\Patrick\Documents\PROGRAMMING\OPENGL\GitHub\OpenGL_Learning\OGLplus_build\_build\include;C:\Users\Patrick\Documents\PROGRAMMING\OPENGL\GitHub\OpenGL_Learning\OGLplus_build\implement;C:\Users\Patrick\Documents\PROGRAMMING\OPENGL\GitHub\OpenGL_Learning\OGLplus_build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>GLEW_STATIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>E:\FILES\PROGRAMMING\Savana_Game\Savana\OpenGL\GLEW\lib\Release\Win32;E:\FILES\PROGRAMMING\Savana_Game\Savana\OpenGL\GLFW\lib-msvc120;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glew32s.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\GL\GLEW\lib\Release\Win32;C:\GL\SFML-VS2013\Libs\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

@@ -1,31 +1,34 @@
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
+#include <SFML/Graphics.hpp>
+#include "Misc.h"
+#include "Game.h"
+#include "Sprites.h"
 
-int main() {
-	glfwInit();
-	glewExperimental = GL_TRUE;
-	glewInit();
+#include <iostream>
+#include <Windows.h>
 
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+int main(int argc, char* argv) {
+	// DEBUGGING
+	std::cout << argv[1];
 
-	GLFWwindow* window = glfwCreateWindow(1920, 1080, "OpenGL", glfwGetPrimaryMonitor(), nullptr); // Fullscreen
+	// initialse
+	Game::init();
 
-	glfwMakeContextCurrent(window);
-
-	while (!glfwWindowShouldClose(window))
-	{
-		// drawing
-		glfwSwapBuffers(window);
-
+	// game loop
+	while (Misc::MyWindow.window.isOpen()){
 		// event handling
-		glfwPollEvents();
-		if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-			glfwSetWindowShouldClose(window, GL_TRUE);
+		sf::Event evt;
+		while (Misc::MyWindow.window.pollEvent(evt)) {
+			Misc::event_handler(evt);
+		}
+
+		//update
+		Misc::MyWindow.window.clear(sf::Color::Black);
+
+		Game::state_update();
+
+		Misc::MyWindow.window.display();
 	}
 
-	
-	glfwTerminate();
+	// terminate
+	return 0;
 }
